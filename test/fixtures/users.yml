@@ -1,0 +1,4 @@
+michael:
+  name: michael chan
+  email: chan@exmaple.com
+  password_digest: <%= User.digest('password') %>
