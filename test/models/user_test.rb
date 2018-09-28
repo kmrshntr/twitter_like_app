@@ -70,4 +70,8 @@ class UserTest < ActiveSupport::TestCase
   	@user.password = @user.password_confirmation = " " * 6
   	assert_not @user.valid?
   end
+
+  test "authenticated? should return flase when remember digest is nil" do
+    assert_not @user.authenticated?('')
+  end
 end
