@@ -1,0 +1,3 @@
+Hi <%= @user.name %>,
+Twitter like app へようこそ、もしアカウントを有効にしたければしたのリンクをクリックしてください。
+<%= edit_accout_activation_url(@user.activation_token, email: @user.email) %>

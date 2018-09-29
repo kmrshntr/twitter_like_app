@@ -1,0 +1,4 @@
+<h1>Twitter like app</h1>
+<p>こんにちは <%= @user.name %>さん</p> 
+<p>もしアカウントを有効化したいならば、下のURLをクリックしてください。</p>
+<%= link_to "Activate", edit_accout_activation_url(@user.activation_token, email: @user.email) %>

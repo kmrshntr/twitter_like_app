@@ -72,6 +72,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "authenticated? should return flase when remember digest is nil" do
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?(:remember, '')
   end
 end

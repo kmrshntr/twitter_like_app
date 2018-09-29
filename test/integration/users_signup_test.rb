@@ -15,17 +15,31 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   	assert_select 'div.field_with_errors'
   end
 
-  test "signup with valid information" do
+  test "signup with valid information with account activation" do
   	get signup_path
   	assert_difference 'User.count', 1 do
- 		post users_path, params: { user: { name: "exmaple",
-  											email: "exmaple@gmail.com",
-  											password: "foobar",
-  											password_confirmation: "foobar" } }
+ 	  	post users_path, params: { user: { name: "example",
+  											                   email: "example@gmail.com",
+  										                      password: "foobar",
+  										                      password_confirmation: "foobar" } }
   	end
-  	follow_redirect!
-  	assert_template 'users/show'
-  	assert_not flash.empty?
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    user = assigns(:user)
+    assert_not user.activated?
+    #有効化していない状態でログインしてみる
+    log_in_as user
+    assert_not is_logged_in?
+    #有効化トークンが不正な場合
+    get edit_accout_activation_path("invalid token", email: user.email)
+    assert_not is_logged_in?
+    #トークンは正しいがメールアドレスが無効な場合
+    get edit_accout_activation_path(user.activation_token, email:"wrong@wornf.cond")
+    assert_not is_logged_in?
+    #有効化トークンが正しい場合
+    get edit_accout_activation_path(user.activation_token, email: user.email)
+    assert user.reload.activated?
+   	follow_redirect!
+    assert_template 'users/show'
     assert is_logged_in?
   end
 
