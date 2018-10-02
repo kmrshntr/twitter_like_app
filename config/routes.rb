@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get    '/contact', to: 'static_pages#contact'
   #users
   get    '/signup',  to: 'users#new'
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   #sessions
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
@@ -19,4 +23,6 @@ Rails.application.routes.draw do
   resources :password_resets,    only: [:new, :create, :edit, :update]
   #microposts
   resources :microposts,         only: [:create, :destroy]
+  #relationships
+  resources :relationships,      only: [:create, :destroy]
 end
