@@ -3,8 +3,9 @@ require 'test_helper'
 class MicropostTest < ActiveSupport::TestCase
 
 	def setup
-		@user = users(:michael)
-		@micropost = @user.microposts.build(content: "Hello world")
+		@michael = users(:michael)
+		@micropost = microposts(:orange)
+		@archer = users(:archer)
 	end
 
 	test "should be valid" do
@@ -28,5 +29,13 @@ class MicropostTest < ActiveSupport::TestCase
 
 	test "order should be most resent first" do
 		assert_equal microposts(:most_recent), Micropost.first
+	end
+
+	test "should like and unlike micropost" do
+		assert_not @micropost.liked?(@archer)
+		@micropost.like(@archer)
+		assert @micropost.liked?(@archer)
+		@micropost.unlike(@archer)
+		assert_not @micropost.liked?(@archer)
 	end
 end
