@@ -4,6 +4,7 @@ class UsersIndexTestTest < ActionDispatch::IntegrationTest
   def setup
   	@admin = users(:michael)
     @non_admin = users(:archer)
+    @lana = users(:lana)
   end
 
   test "index as admin including pagination and delete" do
@@ -26,5 +27,12 @@ class UsersIndexTestTest < ActionDispatch::IntegrationTest
     log_in_as(@non_admin)
     get users_path
     assert_select 'a', text: 'delete', count: 0 
+  end
+
+  test "search feed work perfectly at user index" do
+    log_in_as(@admin)
+    get users_path, params: { search: @non_admin.name }
+    assert_match @non_admin.name, response.body
+    assert_no_match @lana.name, response.body
   end
 end

@@ -1,7 +1,13 @@
 <% provide(:title, "All users") %>
+<% provide(:form_path, users_path) %>
+<% provide(:form_title, "User search") %>
 <h1>All users</h1>
 
 <%= will_paginate %>
+<!-- ここに検索機能を追加する　-->
+<div class="user_search">
+	<%= render 'shared/search_form' %>
+</div>
 <ul class="users">
 	<% @users.each do |user| %>
 		<%= render user %>

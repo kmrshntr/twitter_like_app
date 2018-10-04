@@ -1,3 +1,6 @@
+<% provide(:form_path, root_path) %>
+<% provide(:form_title, "Feed search") %>
+
 <% if logged_in? %>
 <div class="row">
 	<aside class="col-md-4">
@@ -13,6 +16,7 @@
 	</aside>
 	<div class="col-md-8">
 		<h3>Micropost Feed</h3>
+		<%= render 'shared/search_form' %>
 		<%= render 'shared/feed' %>
 	</div>
 </div>

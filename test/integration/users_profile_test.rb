@@ -4,6 +4,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
 
 def setup
 	@user = users(:michael)
+	@micropost = microposts(:orange)
 end 
 
 test "profile display" do
@@ -17,6 +18,11 @@ test "profile display" do
 	@user.microposts.paginate(page: 1).each do |micropost|
 		assert_match micropost.content, response.body
 	end
+end
+
+test "search micropost work perfectly at show" do
+	get user_path(@user), params: { search: @micropost.content }
+	assert_match @micropost.content, response.body
 end
 
 end

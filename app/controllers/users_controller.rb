@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find_by(id: params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    @microposts = @user.microposts.paginate(page: params[:page]).search(params[:search])
   end
 
   def edit
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page]).search(params[:search]) 
   end
 
   def destroy
