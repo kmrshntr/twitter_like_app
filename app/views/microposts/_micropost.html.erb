@@ -12,5 +12,6 @@
 		<% end %>
 	</span>
 	<%= render 'microposts/like_form', micropost: micropost %>
-	</span>
+	<span class="comment_link"><%= link_to 'Comment', micropost_path(micropost) %></span>
+	<span><%= pluralize(micropost.comments.count, "comment") %></span>
 </li>

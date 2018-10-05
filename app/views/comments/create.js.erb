@@ -1,0 +1,4 @@
+$("#micropost-<%= @micropost.id %> #comment_counts").html("<%= escape_javascript(pluralize(@micropost.comments.count, "comment")) %>");
+$("#micropost-<%= @micropost.id %> #comment_list").html("<%= escape_javascript(render('comments/index', comments: @comment.micropost.comments)) %>");
+$("textarea").val('')
+//上の@comment.micropost.commentsがポイント、@commentsではない

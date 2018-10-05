@@ -111,4 +111,14 @@ class UserTest < ActiveSupport::TestCase
       assert_not michael.feed.include?(post_unfollowed)
     end
   end
+
+  test "associated comments should be destroyed" do
+    archer = users(:archer)
+    micropost = microposts(:ants)
+    content = "example"  
+    micropost.comments.create(content: content, user_id: archer.id)
+    assert_difference 'micropost.comments.count', -1 do
+      archer.destroy
+    end
+  end
 end

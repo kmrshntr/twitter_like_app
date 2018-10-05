@@ -28,4 +28,9 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
 		end
 		assert_redirected_to root_url
 	end
+
+	test "should redirect show when not logged in" do
+		get micropost_path(@micropost)
+		assert_redirected_to login_url
+	end
 end

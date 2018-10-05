@@ -13,5 +13,5 @@
 			<% end %>
 		<% end %>
 	<% end %>
-	<%= pluralize(Like.where(micropost_id: micropost.id).count, "like") %>
+	<span><%= pluralize(Like.where(micropost_id: micropost.id).count, "like") %></span>
 </div>

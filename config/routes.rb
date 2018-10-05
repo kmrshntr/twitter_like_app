@@ -22,9 +22,11 @@ Rails.application.routes.draw do
   #password_resets
   resources :password_resets,    only: [:new, :create, :edit, :update]
   #microposts
-  resources :microposts,         only: [:create, :destroy]
+  resources :microposts,         only: [:show, :create, :destroy]
   #relationships
   resources :relationships,      only: [:create, :destroy]
   #likes
   resources :likes,              only: [:create, :destroy]
+  #comments
+  resources :comments,           only: [:create, :destroy]
 end

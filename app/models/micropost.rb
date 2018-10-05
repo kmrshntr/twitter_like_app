@@ -2,6 +2,7 @@ class Micropost < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
+  has_many :comments, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
@@ -19,6 +20,10 @@ class Micropost < ApplicationRecord
 
   def liked?(user)
     like_users.include?(user)
+  end
+   #contentが無いと作れない
+  def comment(content, user)
+    @comment = self.comments.build(content: content, user_id: user.id)
   end
 
   def Micropost.search(search)

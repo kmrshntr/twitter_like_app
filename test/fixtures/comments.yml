@@ -1,0 +1,5 @@
+fight:
+  content: "Go for it!"
+  micropost: orange
+  user: michael
+  created_at: <%= Time.zone.now %>
