@@ -430,7 +430,7 @@ DEPENDENCIES
   jbuilder (= 2.7.0)
   jquery-rails (= 4.3.1)
   listen (= 3.1.5)
-  mini_magick (= 4.7.0)
+  mini_magick
   minitest (= 5.10.3)
   minitest-reporters (= 1.1.14)
   pg (= 0.20.0)
